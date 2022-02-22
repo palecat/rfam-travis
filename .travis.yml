@@ -1,0 +1,15 @@
+dist: focal
+
+jobs:
+  include:
+    - stage: "rfam-connect"
+      name: "Connect to Public Rfam Database"
+
+      env:
+        DB_DATABASE: Rfam
+        DB_USER: rfamro
+        DB_PORT: 4497
+        DB_HOST: mysql-rfam-public.ebi.ac.uk
+
+      script:
+        - mysql -u $DB_USER -h $DB_HOST -P $DB_PORT -D $DB_DATABASE < script.sql
